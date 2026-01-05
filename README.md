@@ -1,12 +1,12 @@
 # Lifting Tracker
 
 This is a full stack application for tracking gym progress and visualizing volume load over time (calculated as weight * total reps over 3 sets).
-This is my first time dipping my toes into full stack and while I am nowhere near proficient in the MERN stack, I learned a lot about the different parts that work together while working on this project.
+This is my first time dipping my toes into full-stack. While I am nowhere near proficient in the MERN stack, I learned a lot about the different parts that work together while working on this project.
 
 ## Features
 
-* **Interative Graph:** Visualizes volume load progress over time using Recharts
-* **Workout Logging:** Input form for name of exercise, weight, and reps
+* **Interactive Graph:** Visualizes volume load progress over time using Recharts
+* **Workout Logging:** Input form for name of the exercise, weight, and reps
 * **Tracking and Management:** Table format to view past workouts and delete unneeded entries
 * **Security:** Require admin passworrd to authenticate middleware and protect database from unauthorized form submissions
 
