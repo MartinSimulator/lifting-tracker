@@ -1,0 +1,36 @@
+:root {
+  /* Pastel Palette */
+  --primary: #8b8df2;       /* Pastel Periwinkle */
+  --primary-hover: #7678d1; 
+  
+  --bg-color: #f8f9fe;      /* Cool White Background */
+  --surface: #ffffff;       /* Pure White Cards */
+  
+  --text-main: #475569;     /* Soft Charcoal */
+  --text-muted: #94a3b8;    /* Muted Gray */
+  
+  --danger: #fda4af;        /* Pastel Red */
+  --danger-hover: #fb7185;
+  
+  --border: #eef2f6;        /* Subtle Border */
+  
+  /* Dimensions */
+  --radius-lg: 24px;        /* Big rounded corners */
+  --radius-sm: 12px;        /* Small rounded corners */
+  --shadow-soft: 0 20px 40px -15px rgba(100, 116, 139, 0.1);
+}
+
+body {
+  margin: 0;
+  font-family: 'Nunito', 'Segoe UI', system-ui, sans-serif;
+  background-color: var(--bg-color);
+  color: var(--text-main);
+  line-height: 1.5;
+}
+
+/* Make headings look good globally */
+h1, h2, h3, h4 {
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  margin: 0;
+}
