@@ -5,7 +5,7 @@
 import { useState } from "react";
 import axios from "axios";
 import "./App.css";
-import { API_URL, getAuthHeader } from '../config';
+import { API_URL, getAuthHeader } from "./config";
 
 const WorkoutForm = ({ onWorkoutAdded }) => {
   // tracking what the user inputs
@@ -27,7 +27,9 @@ const WorkoutForm = ({ onWorkoutAdded }) => {
 
     try {
       // send the inputted workout data to the backend port 5001
-      await axios.post(`${API_URL}/api/workouts`, workoutData, { headers: getAuthHeader() });
+      await axios.post(`${API_URL}/api/workouts`, workoutData, {
+        headers: getAuthHeader(),
+      });
       alert("Workout Saved!");
 
       // clear the form
@@ -46,7 +48,7 @@ const WorkoutForm = ({ onWorkoutAdded }) => {
 
   return (
     <form onSubmit={handleSubmit}>
-      <h3 marginBottom='20px'>Add New Workout</h3>
+      <h3 marginBottom="20px">Add New Workout</h3>
 
       {/*Exercise Selector*/}
       <div className="form-group">
