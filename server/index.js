@@ -13,7 +13,7 @@ const workoutRoutes = require("./routes/workouts");
 // allow frontend to talk to us
 app.use(
   cors({
-    origin: "*", // Your actual Vercel URL
+    origin: ["https://lifting-tracker-nu.vercel.app", "http://localhost:5173"],
     methods: ["GET", "POST", "PUT", "DELETE"],
     credentials: true,
   })
