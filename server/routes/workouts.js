@@ -32,9 +32,9 @@ router.get("/graph/:exercise", async (req, res) => {
     // get exercise name from request
     const exerciseName = req.params.exercise;
     // array of workouts with that exercise name and sort by date
-    const workouts = await Workout.find({ exercise: exerciseName }).sort({
-      date: 1,
-    });
+    const workouts = await Workout.find({
+      exercise: { $regex: new RegExp(exerciseName, "i") },
+    }).sort({ date: 1 });
 
     const graphData = workouts.map((workout) => {
       // sum the reps
