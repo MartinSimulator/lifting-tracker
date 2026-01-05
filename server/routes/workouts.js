@@ -6,8 +6,21 @@ const express = require("express");
 const router = express.Router();
 const Workout = require("../models/Workout");
 
+// only allow people with a password to enter workouts in the database
+const requireAuth = (req, res, next) => {
+  const password = req.headers["x-admin-password"];
+
+  if (password === process.env.ADMIN_PASSWORD) {
+    next();
+  } else {
+    res
+      .status(401)
+      .json({ error: "Unauthorized: You need the Admin Password!" });
+  }
+};
+
 // route 1: save a workout
-router.post("/", async (req, res) => {
+router.post("/", requireAuth, async (req, res) => {
   const { exercise, weight, reps } = req.body;
   try {
     // create a new workout
@@ -62,7 +75,7 @@ router.get("/graph/:exercise", async (req, res) => {
 });
 
 // route 3: delete a workout
-router.delete("/:id", async (req, res) => {
+router.delete("/:id", requireAuth, async (req, res) => {
   try {
     const { id } = req.params;
     await Workout.findByIdAndDelete(id);
