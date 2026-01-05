@@ -13,7 +13,7 @@ import {
   ResponsiveContainer,
 } from "recharts";
 import "./App.css";
-import {API_URL} from './config';
+import { API_URL, requireAuth } from "./config";
 
 const LiftGraph = ({ exercise, updateTrigger }) => {
   // hold list of workouts from db
@@ -40,10 +40,14 @@ const LiftGraph = ({ exercise, updateTrigger }) => {
   const handleDelete = async (id) => {
     if (confirm("Delete This Entry?")) {
       try {
-        await axios.delete(`${API_URL}/api/workouts/${id}`, { headers: getAuthHeader() });
-        setData((prevData) => prevData.filter((item) => item._id != id));
+        await axios.delete(`${API_URL}/api/workouts/${id}`, {
+          headers: getAuthHeader(),
+        });
+
+        setData((prevData) => prevData.filter((item) => item._id !== id));
       } catch (err) {
         console.error("Failed to Delete", err);
+        alert("Incorrect Password!"); // feedback if they type it wrong
       }
     }
   };
@@ -55,7 +59,10 @@ const LiftGraph = ({ exercise, updateTrigger }) => {
       <div className="chart-container">
         {data.length > 0 ? (
           <ResponsiveContainer>
-            <LineChart data={data} margin={{ top: 5, right: 20, bottom: 5, left: 0 }}>
+            <LineChart
+              data={data}
+              margin={{ top: 5, right: 20, bottom: 5, left: 0 }}
+            >
               <XAxis
                 dataKey="date"
                 tickFormatter={(dateStr) => {
@@ -114,7 +121,6 @@ const LiftGraph = ({ exercise, updateTrigger }) => {
           </tbody>
         </table>
       </div>
-      
     </div>
   );
 };
