@@ -40,7 +40,7 @@ const LiftGraph = ({ exercise, updateTrigger }) => {
   const handleDelete = async (id) => {
     if (confirm("Delete This Entry?")) {
       try {
-        await axios.delete(`${API_URL}/api/workouts/${id}`);
+        await axios.delete(`${API_URL}/api/workouts/${id}`, { headers: getAuthHeader() });
         setData((prevData) => prevData.filter((item) => item._id != id));
       } catch (err) {
         console.error("Failed to Delete", err);
