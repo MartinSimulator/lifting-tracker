@@ -13,7 +13,7 @@ import {
   ResponsiveContainer,
 } from "recharts";
 import "./App.css";
-import { API_URL, requireAuth } from "./config";
+import { API_URL, getAuthHeader } from "./config";
 
 const LiftGraph = ({ exercise, updateTrigger }) => {
   // hold list of workouts from db
