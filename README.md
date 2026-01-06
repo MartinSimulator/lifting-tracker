@@ -2,6 +2,7 @@
 
 This is a full stack application for tracking gym progress and visualizing volume load over time (calculated as weight * total reps over 3 sets).
 This is my first time dipping my toes into full-stack. While I am nowhere near proficient in the MERN stack, I learned a lot about the different parts that work together while working on this project.
+[Live Website Demo](https://www.youtube.com/watch?v=Np_IGvwd-m0)
 
 ## Features
 
