@@ -21,13 +21,13 @@ const WorkoutSchema = new mongoose.Schema({
   reps: {
     type: Array,
     required: true,
-    validate: [arrayLimit, `{PATH} must be exactly 3 sets.`],
+    validate: [arrayLimit, `{PATH} must be exactly 2 sets.`],
   },
 });
 
-// function ensure 3 sets are inputted in reps, used in validate
+// function ensure 2 sets are inputted in reps, used in validate
 function arrayLimit(val) {
-  return val.length === 3;
+  return val.length === 2;
 }
 // export the model
 module.exports = mongoose.model("Workout", WorkoutSchema);

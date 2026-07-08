@@ -41,7 +41,8 @@ function App() {
             className="exercise-selector"
           >
             <option value="Incline DB Bench Press">Incline DB Bench Press</option>
-            <option value="Cable Lateral Raise">Cable Lateral Raise</option>
+            <option value="Pec Deck Fly">Pec Deck Fly</option>
+            <option value="Cable Lateral Raise"> Cable Lateral Raise</option>
             <option value="Face Pull">Face Pull</option>
             <option value="DB Shoulder Press">DB Shoulder Press</option>
             <option value="One Arm Tricep Pushdown">
@@ -49,8 +50,10 @@ function App() {
             </option>
             <option value="DB Skull Crusher">DB Skull Crusher</option>
             <option value="Pulldown">Pulldown</option>
-            <option value="Cable Row">Cable Row</option>
+            <option value="Close Grip Cable Row">Close Grip Cable Row</option>
+            <option value="Wide Grip Cable Row">Wide Grip Cable Row</option>
             <option value="DB Preacher Curl">DB Preacher Curl</option>
+            <option value="Seated Preacher Curl">Seated Preacher Curl</option>
             <option value="Seated Incline DB Curl">Seated Incline DB Curl</option>
             <option value="Cable Hammer Curl">Cable Hammer Curl</option>
           </select>
