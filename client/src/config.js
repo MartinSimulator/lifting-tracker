@@ -1,7 +1,7 @@
 const isProduction = import.meta.env.MODE === "production";
 
 export const API_URL = isProduction
-  ? "https://lifting-tracker-api.onrender.com"
+  ? "https://lift-tracker-api-152178411789.us-central1.run.app"
   : "http://localhost:8080";
 
 export const getAuthHeader = () => {
