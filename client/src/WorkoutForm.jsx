@@ -11,7 +11,7 @@ const WorkoutForm = ({ onWorkoutAdded }) => {
   // tracking what the user inputs
   const [exercise, setExercise] = useState("Bench Press");
   const [weight, setWeight] = useState("");
-  const [reps, setReps] = useState({ set1: "", set2: "", set3: "" });
+  const [reps, setReps] = useState({ set1: "", set2: ""});
 
   // handle when the user clicks save
   const handleSubmit = async (e) => {
@@ -22,7 +22,7 @@ const WorkoutForm = ({ onWorkoutAdded }) => {
     const workoutData = {
       exercise: exercise,
       weight: Number(weight),
-      reps: [Number(reps.set1), Number(reps.set2), Number(reps.set3)],
+      reps: [Number(reps.set1), Number(reps.set2)],
     };
 
     try {
@@ -34,7 +34,7 @@ const WorkoutForm = ({ onWorkoutAdded }) => {
 
       // clear the form
       setWeight("");
-      setReps({ set1: "", set2: "", set3: "" });
+      setReps({ set1: "", set2: ""});
 
       // refresh the graph by triggering the useTrigger in App.jsx
       if (onWorkoutAdded) {
@@ -55,6 +55,7 @@ const WorkoutForm = ({ onWorkoutAdded }) => {
         <label>Exercise: </label>
         <select value={exercise} onChange={(e) => setExercise(e.target.value)}>
           <option value="Incline DB Bench Press">Incline DB Bench Press</option>
+          <option value="Pec Deck Fly">Pec Deck Fly</option>
           <option value="Cable Lateral Raise"> Cable Lateral Raise</option>
           <option value="Face Pull">Face Pull</option>
           <option value="DB Shoulder Press">DB Shoulder Press</option>
@@ -63,8 +64,10 @@ const WorkoutForm = ({ onWorkoutAdded }) => {
           </option>
           <option value="DB Skull Crusher">DB Skull Crusher</option>
           <option value="Pulldown">Pulldown</option>
-          <option value="Cable Row">Cable Row</option>
+          <option value="Close Grip Cable Row">Close Grip Cable Row</option>
+          <option value="Wide Grip Cable Row">Wide Grip Cable Row</option>
           <option value="DB Preacher Curl">DB Preacher Curl</option>
+          <option value="Seated Preacher Curl">Seated Preacher Curl</option>
           <option value="Seated Incline DB Curl">Seated Incline DB Curl</option>
           <option value="Cable Hammer Curl">Cable Hammer Curl</option>
         </select>
@@ -99,13 +102,6 @@ const WorkoutForm = ({ onWorkoutAdded }) => {
             value={reps.set2}
             required
             onChange={(e) => setReps({ ...reps, set2: e.target.value })}
-          />
-          <input
-            type="number"
-            placeholder="Set 3"
-            value={reps.set3}
-            required
-            onChange={(e) => setReps({ ...reps, set3: e.target.value })}
           />
         </div>
       </div>
