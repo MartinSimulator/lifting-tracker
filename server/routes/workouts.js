@@ -50,20 +50,25 @@ router.get("/graph/:exercise", async (req, res) => {
     }).sort({ date: 1 });
 
     const graphData = workouts.map((workout) => {
-      // sum the reps
-      let totalReps = 0;
-      for (let i = 0; i < workout.reps.length; i++) {
-        totalReps += workout.reps[i];
+      let totalVolume = 0;
+      if (Array.isArray(workout.weight)) {
+        for (let i = 0; i < workout.reps.length; i++) {
+          totalVolume += workout.weight[i] * workout.reps[i];
+        }
+      } else {
+        let totalReps = 0;
+        for (let i = 0; i < workout.reps.length; i++) {
+          totalReps += workout.reps[i];
+        }
+        totalVolume = totalReps * workout.weight;
       }
-      // calculate volume as reps * weight
-      const volume = totalReps * workout.weight;
       // return the date and volume for graphing purposes
       return {
         _id: workout._id,
         date: workout.date,
         weight: workout.weight,
         reps: workout.reps,
-        volume: volume,
+        volume: totalVolume,
       };
     });
     // convert to json for frontend use

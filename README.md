@@ -25,7 +25,7 @@ This is my first time dipping my toes into full-stack. While I am nowhere near p
 
 **Deployment:**
 * Frontend: Vercel
-* Backend: Render
+* Backend: Google Cloud Run
 * Database: MongoDB Atlas
 
 ## Local Setup

@@ -15,6 +15,15 @@ import {
 import "./App.css";
 import { API_URL, getAuthHeader } from "./config";
 
+const formatSets = (workout) => {
+  if (Array.isArray(workout.weight)) {
+    return workout.weight
+      .map((w, i) => `${w} lbs x ${workout.reps[i]}`)
+      .join(", ");
+  }
+  return `${workout.weight} lbs - ${workout.reps.join(", ")} reps`;
+};
+
 const LiftGraph = ({ exercise, updateTrigger }) => {
   // hold list of workouts from db
   const [data, setData] = useState([]);
@@ -93,8 +102,7 @@ const LiftGraph = ({ exercise, updateTrigger }) => {
           <thead>
             <tr>
               <th style={{ padding: "8px" }}>Date</th>
-              <th style={{ padding: "8px" }}>Weight</th>
-              <th style={{ padding: "8px" }}>Reps</th>
+              <th style={{ padding: "8px" }}>Sets</th>
               <th style={{ padding: "8px" }}>Action</th>
             </tr>
           </thead>
@@ -103,9 +111,7 @@ const LiftGraph = ({ exercise, updateTrigger }) => {
             {[...data].reverse().map((workout) => (
               <tr key={workout._id}>
                 <td>{new Date(workout.date).toLocaleDateString()}</td>
-                <td>{workout.weight} lbs</td>
-                {/* join the reps array (5, 5, 5) */}
-                <td>{workout.reps.join(", ")} reps</td>
+                <td>{formatSets(workout)}</td>
                 {/*delete button*/}
                 <td>
                   <button

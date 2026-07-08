@@ -7,36 +7,38 @@ import axios from "axios";
 import "./App.css";
 import { API_URL, getAuthHeader } from "./config";
 
-const WorkoutForm = ({ onWorkoutAdded }) => {
-  // tracking what the user inputs
-  const [exercise, setExercise] = useState("Bench Press");
-  const [weight, setWeight] = useState("");
-  const [reps, setReps] = useState({ set1: "", set2: ""});
+const emptySets = () => [
+  { weight: "", reps: "" },
+  { weight: "", reps: "" },
+];
 
-  // handle when the user clicks save
+const WorkoutForm = ({ onWorkoutAdded }) => {
+  const [exercise, setExercise] = useState("Incline DB Bench Press");
+  const [sets, setSets] = useState(emptySets);
+
+  const updateSet = (index, field, value) => {
+    setSets((prev) =>
+      prev.map((set, i) => (i === index ? { ...set, [field]: value } : set))
+    );
+  };
+
   const handleSubmit = async (e) => {
-    // stop handleSubmit default action (refreshing the page)
     e.preventDefault();
 
-    // package the data, ensure weight is a number and reps is an array of numbers
     const workoutData = {
-      exercise: exercise,
-      weight: Number(weight),
-      reps: [Number(reps.set1), Number(reps.set2)],
+      exercise,
+      weight: sets.map((s) => Number(s.weight)),
+      reps: sets.map((s) => Number(s.reps)),
     };
 
     try {
-      // send the inputted workout data to the backend port 5001
       await axios.post(`${API_URL}/api/workouts`, workoutData, {
         headers: getAuthHeader(),
       });
       alert("Workout Saved!");
 
-      // clear the form
-      setWeight("");
-      setReps({ set1: "", set2: ""});
+      setSets(emptySets());
 
-      // refresh the graph by triggering the useTrigger in App.jsx
       if (onWorkoutAdded) {
         onWorkoutAdded();
       }
@@ -50,7 +52,6 @@ const WorkoutForm = ({ onWorkoutAdded }) => {
     <form onSubmit={handleSubmit}>
       <h3 marginBottom="20px">Add New Workout</h3>
 
-      {/*Exercise Selector*/}
       <div className="form-group">
         <label>Exercise: </label>
         <select value={exercise} onChange={(e) => setExercise(e.target.value)}>
@@ -73,37 +74,32 @@ const WorkoutForm = ({ onWorkoutAdded }) => {
         </select>
       </div>
 
-      {/*Weight Selector*/}
       <div className="form-group">
-        <label>Weight: </label>
-        <input
-          type="number"
-          value={weight}
-          onChange={(e) => setWeight(e.target.value)}
-          placeholder="lbs"
-          required
-        />
-      </div>
-
-      {/*Reps Selector*/}
-      <div className="form-group">
-        <label>Reps: </label>
-        <div style={{ display: "flex", marginTop: "5px", gap: "5px" }}>
-          <input
-            type="number"
-            placeholder="Set 1"
-            value={reps.set1}
-            required
-            onChange={(e) => setReps({ ...reps, set1: e.target.value })}
-          />
-          <input
-            type="number"
-            placeholder="Set 2"
-            value={reps.set2}
-            required
-            onChange={(e) => setReps({ ...reps, set2: e.target.value })}
-          />
-        </div>
+        <label>Sets: </label>
+        {sets.map((set, index) => (
+          <div
+            key={index}
+            style={{ display: "flex", marginTop: "5px", gap: "5px", alignItems: "center" }}
+          >
+            <span style={{ minWidth: "45px", fontSize: "0.9rem" }}>
+              Set {index + 1}
+            </span>
+            <input
+              type="number"
+              placeholder="lbs"
+              value={set.weight}
+              required
+              onChange={(e) => updateSet(index, "weight", e.target.value)}
+            />
+            <input
+              type="number"
+              placeholder="reps"
+              value={set.reps}
+              required
+              onChange={(e) => updateSet(index, "reps", e.target.value)}
+            />
+          </div>
+        ))}
       </div>
 
       <button

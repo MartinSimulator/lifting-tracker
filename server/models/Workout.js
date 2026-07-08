@@ -15,8 +15,9 @@ const WorkoutSchema = new mongoose.Schema({
     required: true,
   },
   weight: {
-    type: Number,
+    type: Array,
     required: true,
+    validate: [arrayLimit, `{PATH} must be exactly 2 sets.`],
   },
   reps: {
     type: Array,
@@ -25,7 +26,7 @@ const WorkoutSchema = new mongoose.Schema({
   },
 });
 
-// function ensure 2 sets are inputted in reps, used in validate
+// function ensure 2 sets are inputted, used in validate
 function arrayLimit(val) {
   return val.length === 2;
 }
